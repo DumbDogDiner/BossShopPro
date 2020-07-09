@@ -70,7 +70,7 @@ public class InventoryListener implements Listener {
     }
 
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH)
     public void purchase(InventoryClickEvent event) {
         if (!(event.getInventory().getHolder() instanceof BSShopHolder)) {
             return;

@@ -24,7 +24,7 @@ public class PlayerListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH)
     public void shopCommand(PlayerCommandPreprocessEvent e) {
         if (!e.isCancelled()) {
             if (plugin.getClassManager().getSettings().getShopCommandsEnabled()) {

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.black_ixx</groupId>
 	<artifactId>BossShopPro</artifactId>
-	<version>2.0.9</version>
+	<version>2.0.10-DDD-SNAPSHOT</version>
 	<name>BossShopPro</name>
 	<description>Create virtual chest shops</description>
 	<build>
