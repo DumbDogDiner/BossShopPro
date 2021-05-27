@@ -16,7 +16,6 @@ import org.black_ixx.bossshop.managers.external.VaultHandler;
 import org.black_ixx.bossshop.managers.external.spawners.ISpawnEggHandler;
 import org.black_ixx.bossshop.managers.external.spawners.ISpawnerHandler;
 import org.black_ixx.bossshop.managers.external.spawners.SpawnersHandlerEpicSpawners;
-import org.black_ixx.bossshop.managers.external.spawners.SpawnersHandlerSilkSpawners;
 import org.black_ixx.bossshop.managers.features.*;
 import org.black_ixx.bossshop.managers.item.ItemDataPart;
 import org.black_ixx.bossshop.managers.item.ItemStackChecker;
@@ -100,7 +99,7 @@ public class ClassManager {
             languageManager = new LanguageManager();
         }
 
-        if (Bukkit.getPluginManager().isPluginEnabled("SilkSpawners")) {
+        /*if (Bukkit.getPluginManager().isPluginEnabled("SilkSpawners")) {
             try {
                 Class.forName("de.dustplanet.util.SilkUtil");
                 SpawnersHandlerSilkSpawners h = new SpawnersHandlerSilkSpawners();
@@ -111,7 +110,7 @@ public class ClassManager {
                         "Note: There are different SilkSpawners plugins around. The one BossShopPro can hook into is https://www.spigotmc.org/resources/7811/. " +
                         "Others are simply ignored.");
             }
-        }
+        }*/
 
         if (Bukkit.getPluginManager().isPluginEnabled("EpicSpawners")) {
             spawnerHandler = new SpawnersHandlerEpicSpawners();

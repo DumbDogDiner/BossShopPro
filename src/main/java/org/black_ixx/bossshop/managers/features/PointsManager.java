@@ -31,7 +31,7 @@ public class PointsManager {
         }
 
         switch (p) {
-            case COMMANDPOINTS:
+            /*case COMMANDPOINTS:
                 this.pa = new BSPointsPluginCommandPoints();
                 break;
 
@@ -69,15 +69,15 @@ public class PointsManager {
 
             case VOTINGPLUGIN:
                 this.pa = new BSPointsPluginVotingPlugin();
-                break;
+                break;*/
 
             case KINGDOMS:
                 this.pa = new BSPointsPluginKingdoms();
                 break;
 
-            case GadetsMenu:
+            /*case GadetsMenu:
                 this.pa = new BSPointsPluginGadgetsMenu();
-                break;
+                break;*/
 
             case NONE:
                 this.pa = new BSPointsPluginNone();

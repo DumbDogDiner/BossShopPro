@@ -1,6 +1,6 @@
 package org.black_ixx.bossshop.managers.item;
 
-import com.vk2gpz.tokenenchant.api.TokenEnchantAPI;
+// import com.vk2gpz.tokenenchant.api.TokenEnchantAPI;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.misc.InputReader;
@@ -35,11 +35,11 @@ public class ItemDataPartEnchantment extends ItemDataPart {
 
         Enchantment e = InputReader.readEnchantment(enchantment);
 
-        if (e == null && Bukkit.getPluginManager().isPluginEnabled("TokenEnchant")) {
+        /*if (e == null && Bukkit.getPluginManager().isPluginEnabled("TokenEnchant")) {
             TokenEnchantAPI te = TokenEnchantAPI.getInstance();
             item = te.enchant(null, item, enchantment, level, true, 0, false);
             return item;
-        }
+        }*/
 
         if (e == null) {
             ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + enchantment + "' is not a valid '" + used_name + "'. The name/id of the enchantment is not known.");

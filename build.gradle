@@ -10,6 +10,14 @@ plugins {
 repositories {
     mavenLocal()
     maven {
+        url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
+    }
+    
+    maven {
+        url = 'https://papermc.io/repo/repository/maven-releases/'
+    }
+
+    maven {
         url = uri('https://repo.glaremasters.me/repository/public/')
     }
 
@@ -34,12 +42,13 @@ dependencies {
     implementation 'net.md-5:bungeecord-api:1.14-SNAPSHOT'
     compileOnly 'org.spigotmc:spigot-api:1.16.1-R0.1-SNAPSHOT'
     compileOnly 'org.projectlombok:lombok:1.18.12'
-    compileOnly 'org.bukkit:craftbukkit:1.11.2-R0.1-SNAPSHOT'
+    compileOnly 'com.mojang:authlib:1.5.25'
+    // compileOnly 'org.bukkit:craftbukkit:1.11.2-R0.1-SNAPSHOT'
     compileOnly 'com.google.code.gson:gson:2.1'
     compileOnly 'net.milkbowl:vault:1.7'
     compileOnly 'me.clip:placeholderapi:2.10.3'
     compileOnly 'lilypad.client.connect:api:0.0.1-SNAPSHOT'
-    compileOnly 'org.black_ixx:PlayerPoints:2.1.4'
+    /*compileOnly 'org.black_ixx:PlayerPoints:2.1.4'
     compileOnly 'com.gamingmesh.jobs:Jobs:4.9.1'
     compileOnly 'com.github.Ben12345rocks:VotingPlugin:LATEST'
     compileOnly 'pgDev.bukkit:CommandPoints:1.0'
@@ -51,7 +60,7 @@ dependencies {
     compileOnly 'me.justeli.coins.main:Coins:1.9.2'
     compileOnly 'com.yapzhenyie.GadgetsMenu:GadgetsMenu:4.3.32'
     compileOnly 'me.bukkit.mTokens.Inkzzz:Tokens:1.2'
-    compileOnly 'de.dustplanet.silkspawners.SilkSpawners:SilkSpawners:5.0.2'
+    compileOnly 'de.dustplanet.silkspawners.SilkSpawners:SilkSpawners:5.0.2'*/
     compileOnly 'com.meowj:LangUtils:1.6.1'
 }
 
