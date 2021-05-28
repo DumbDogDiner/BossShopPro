@@ -1,6 +1,7 @@
 package org.black_ixx.bossshop;
 
 
+import kr.entree.spigradle.annotations.PluginMain;
 import org.black_ixx.bossshop.api.BossShopAPI;
 import org.black_ixx.bossshop.api.BossShopAddon;
 import org.black_ixx.bossshop.core.BSShop;
@@ -17,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+@PluginMain
 public class BossShop extends JavaPlugin {
 
     public final static String NAME = "BossShopPro";
