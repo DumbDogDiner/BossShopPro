@@ -6,13 +6,13 @@ import org.black_ixx.bossshop.core.BSShop;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.features.PlayerDataHandler;
 import org.black_ixx.bossshop.misc.userinput.BSChatUserInput;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -61,7 +61,10 @@ public class PlayerListener implements Listener {
             BSChatUserInput i = h.getInputRequest(e.getPlayer());
             if (i != null) {
                 if (i.isUpToDate()) {
-                    i.input(e.getPlayer(), e.getMessage());
+                    // run synchronously, to prevent annoyances
+                    Player p = e.getPlayer();
+                    String message = e.getMessage();
+                    Bukkit.getScheduler().runTask(ClassManager.manager.getPlugin(), () -> i.input(p, message));
                     e.setCancelled(true);
                 }
                 h.removeInputRequest(e.getPlayer());
