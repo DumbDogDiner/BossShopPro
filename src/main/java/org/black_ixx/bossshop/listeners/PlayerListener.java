@@ -88,7 +88,6 @@ public class PlayerListener implements Listener {
 
     private static boolean shouldFreezePlayer(Player p) {
         // first, check if freezing player during input is enabled.
-        // (TODO)
         if (!ClassManager.manager.getSettings().getInputFreeze()) {
             return false;
         }
