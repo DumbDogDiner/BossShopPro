@@ -30,6 +30,7 @@ public class Settings {
             shopcommands, serverpinging_fixconnector, itemall_show_final_reward, inventory_full_drop_items, purchase_async, allow_selling_damaged_items;
     private boolean metrics = true;
     private int serverpinging_delay, serverpinging_waittime, serverpinging_timeout, autorefresh_delay, max_line_length, number_grouping_size, input_timeout;
+    private boolean inputFreeze;
     private String mainshop, number_locale;
     private PointsPlugin pointsplugin;
     private List<String> money_formatting, points_formatting;
@@ -401,6 +402,14 @@ public class Settings {
 
     public void setInputTimeout(int i) {
         input_timeout = i;
+    }
+
+    public boolean getInputFreeze() {
+        return inputFreeze;
+    }
+
+    public void setInputFreeze(boolean b) {
+        inputFreeze = b;
     }
 
 }

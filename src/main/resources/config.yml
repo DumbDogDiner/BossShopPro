@@ -102,6 +102,11 @@ MaxLineLength: 42
 InputTimeout: 45
 #
 #
+# InputFreeze:
+# If enabled, BossShopPro will freeze a player while it waits for their input. If disabled, the player may walk around when input is pending.
+InputFreeze: true
+#
+#
 # MoneyDisplay:
 # Here you can define how the balance of the player will be displayed.
 # Every entry of the list has following structure: <needed>:<to_cut>:<decimal_place>:<formatting>

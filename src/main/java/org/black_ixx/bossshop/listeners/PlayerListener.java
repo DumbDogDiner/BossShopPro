@@ -12,7 +12,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerListener implements Listener {
@@ -84,4 +86,27 @@ public class PlayerListener implements Listener {
         }
     }
 
+    private static boolean shouldFreezePlayer(Player p) {
+        // first, check if freezing player during input is enabled.
+        // (TODO)
+        if (!ClassManager.manager.getSettings().getInputFreeze()) {
+            return false;
+        }
+        // if it's enabled, freeze the player if we're waiting for their input.
+        PlayerDataHandler h = ClassManager.manager.getPlayerDataHandler();
+        if (h != null) {
+            BSChatUserInput i = h.getInputRequest(p);
+            if (i != null) {
+                return i.isUpToDate();
+            }
+        }
+        return false;
+    }
+
+    @EventHandler
+    public void freeze(PlayerMoveEvent event) {
+        if (shouldFreezePlayer(event.getPlayer())) {
+            event.setCancelled(true);
+        }
+    }
 }
