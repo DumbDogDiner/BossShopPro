@@ -13,17 +13,16 @@ import java.util.Date;
 import java.util.List;
 
 public class ItemDataStorage {
-
+    private static final String FILE_NAME = "ItemDataStorage.yml";
+    private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy dd-MM 'at' hh:mm:ss a (E)");
 
     private final BossShop plugin;
-    private final String fileName = "ItemDataStorage.yml";
     private final File file;
     private FileConfiguration config = null;
-    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy dd-MM 'at' hh:mm:ss a (E)");
 
     public ItemDataStorage(final BossShop plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder().getAbsolutePath(), fileName);
+        this.file = new File(plugin.getDataFolder().getAbsolutePath(), FILE_NAME);
         reloadConfig();
     }
 
@@ -36,7 +35,7 @@ public class ItemDataStorage {
 
     public void reloadConfig() {
         config = YamlConfiguration.loadConfiguration(file);
-        InputStream defConfigStream = plugin.getResource(fileName);
+        InputStream defConfigStream = plugin.getResource(FILE_NAME);
         if (defConfigStream != null) {
             YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream));
             config.setDefaults(defConfig);
@@ -47,19 +46,16 @@ public class ItemDataStorage {
         try {
             getConfig().save(file);
         } catch (IOException e) {
-            BossShop.log("Could not save " + fileName + " to " + file);
+            BossShop.log("Could not save " + FILE_NAME + " to " + file);
         }
     }
 
     public String getDate() {
-        Date dNow = new Date();
-        return formatter.format(dNow);
+        return FORMATTER.format(new Date());
     }
 
-    public void addItemData(String playername, List<String> itemdata) {
-        config.set(playername + "." + getDate(), itemdata);
+    public void addItemData(String playerName, List<String> itemData) {
+        config.set(playerName + "." + getDate(), itemData);
         saveConfig();
     }
-
-
 }

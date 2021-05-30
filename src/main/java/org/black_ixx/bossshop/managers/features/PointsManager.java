@@ -5,10 +5,8 @@ import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.pointsystem.*;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.plugin.Plugin;
 
 public class PointsManager {
-
     private BSPointsPlugin pa;
 
     public PointsManager() {
@@ -125,34 +123,34 @@ public class PointsManager {
 
     public enum PointsPlugin {
         NONE(new String[]{"none", "nothing"}),
-        PLAYERPOINTS(new String[]{"PlayerPoints", "PlayerPoint", "PP"}),
-        COMMANDPOINTS(new String[]{"CommandPoints", "CommandPoint", "CP"}),
-        ENJIN_MINECRAFT_PLUGIN(new String[]{"EnjinMinecraftPlugin", "Enjin", "EMP"}),
-        POINTSAPI(new String[]{"PointsAPI", "PAPI"}),
-        TOKENENCHANT(new String[]{"TokenEnchant", "TE", "TokenEnchants"}),
-        TOKENMANAGER(new String[]{"TokenManager", "TM"}),
-        Jobs(new String[]{"Jobs", "JobsReborn"}),
-        MYSQL_TOKENS(new String[]{"MySQL-Tokens", "MySQL-Token"}),
-        MYSQLTOKENS(new String[]{"MySQLTokens", "MySQLToken"}),
-        VOTINGPLUGIN(new String[]{"VotingPlugin", "VP"}),
+        // PLAYERPOINTS(new String[]{"PlayerPoints", "PlayerPoint", "PP"}),
+        // COMMANDPOINTS(new String[]{"CommandPoints", "CommandPoint", "CP"}),
+        // ENJIN_MINECRAFT_PLUGIN(new String[]{"EnjinMinecraftPlugin", "Enjin", "EMP"}),
+        // POINTSAPI(new String[]{"PointsAPI", "PAPI"}),
+        // TOKENENCHANT(new String[]{"TokenEnchant", "TE", "TokenEnchants"}),
+        // TOKENMANAGER(new String[]{"TokenManager", "TM"}),
+        // Jobs(new String[]{"Jobs", "JobsReborn"}),
+        // MYSQL_TOKENS(new String[]{"MySQL-Tokens", "MySQL-Token"}),
+        // MYSQLTOKENS(new String[]{"MySQLTokens", "MySQLToken"}),
+        // VOTINGPLUGIN(new String[]{"VotingPlugin", "VP"}),
         KINGDOMS(new String[]{"Kingdoms", "Kingdom"}),
-        GadetsMenu(new String[]{"GadgetsMenu"}),
+        // GadetsMenu(new String[]{"GadgetsMenu"}),
         //COINS(new String[] { "Coins"}),
         CUSTOM(new String[0]);
 
-        private String[] nicknames;
-        private String custom_name;
+        private final String[] nicknames;
+        private String customName;
 
-        private PointsPlugin(String[] nicknames) {
+        PointsPlugin(String[] nicknames) {
             this.nicknames = nicknames;
         }
 
         public String getCustom() {
-            return this.custom_name;
+            return this.customName;
         }
 
-        public void setCustom(String custom_name) {
-            this.custom_name = custom_name;
+        public void setCustom(String customName) {
+            this.customName = customName;
         }
 
         public String[] getNicknames() {
@@ -161,10 +159,10 @@ public class PointsManager {
 
         public String getPluginName() {
             if (getNicknames() == null) {
-                return custom_name;
+                return customName;
             }
             if (getNicknames().length == 0) {
-                return custom_name;
+                return customName;
             }
             return getNicknames()[0];
         }

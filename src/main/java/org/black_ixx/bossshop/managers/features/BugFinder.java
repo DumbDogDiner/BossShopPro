@@ -1,7 +1,6 @@
 package org.black_ixx.bossshop.managers.features;
 
 import org.black_ixx.bossshop.BossShop;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -13,18 +12,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BugFinder {
-
+    private static final String FILE_NAME = "BugFinder.yml";
+    private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy dd-MM 'at' hh:mm:ss a (E)");
 
     private final BossShop plugin;
-    private final String fileName = "BugFinder.yml";
     private final File file;
-    String USER = "%%__USER__%%";
     private FileConfiguration config = null;
-    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy dd-MM 'at' hh:mm:ss a (E)");
 
     public BugFinder(final BossShop plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder().getAbsolutePath(), fileName);
+        this.file = new File(plugin.getDataFolder().getAbsolutePath(), FILE_NAME);
         reloadConfig();
     }
 
@@ -37,7 +34,7 @@ public class BugFinder {
 
     public void reloadConfig() {
         config = YamlConfiguration.loadConfiguration(file);
-        InputStream defConfigStream = plugin.getResource(fileName);
+        InputStream defConfigStream = plugin.getResource(FILE_NAME);
         if (defConfigStream != null) {
             YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream));
             config.setDefaults(defConfig);
@@ -48,13 +45,12 @@ public class BugFinder {
         try {
             getConfig().save(file);
         } catch (IOException e) {
-            Bukkit.getLogger().severe("[" + BossShop.NAME + "] Could not save BugFinder config to " + file);
+            BossShop.err("Could not save BugFinder config to " + file);
         }
     }
 
     public String getDate() {
-        Date dNow = new Date();
-        return formatter.format(dNow);
+        return FORMATTER.format(new Date());
     }
 
     public void addMessage(String message) {
@@ -64,12 +60,12 @@ public class BugFinder {
 
     public void warn(String message) {
         addMessage(message);
-        Bukkit.getLogger().warning("[" + BossShop.NAME + "] " + message);
+        BossShop.warn(message);
     }
 
     public void severe(String message) {
         addMessage(message);
-        Bukkit.getLogger().severe("[" + BossShop.NAME + "] " + message);
+        BossShop.err(message);
     }
 
 

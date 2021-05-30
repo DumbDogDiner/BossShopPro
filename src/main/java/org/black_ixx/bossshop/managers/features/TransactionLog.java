@@ -15,17 +15,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TransactionLog {
-
+    private static final String FILE_NAME = "TransactionLog.yml";
+    private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy dd-MM 'at' hh:mm:ss a (E)");
 
     private final BossShop plugin;
-    private final String fileName = "TransactionLog.yml";
     private final File file;
     private FileConfiguration config = null;
-    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy dd-MM 'at' hh:mm:ss a (E)");
 
     public TransactionLog(final BossShop plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder().getAbsolutePath(), fileName);
+        this.file = new File(plugin.getDataFolder().getAbsolutePath(), FILE_NAME);
         reloadConfig();
     }
 
@@ -38,7 +37,7 @@ public class TransactionLog {
 
     public void reloadConfig() {
         config = YamlConfiguration.loadConfiguration(file);
-        InputStream defConfigStream = plugin.getResource(fileName);
+        InputStream defConfigStream = plugin.getResource(FILE_NAME);
         if (defConfigStream != null) {
             YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream));
             config.setDefaults(defConfig);
@@ -54,8 +53,7 @@ public class TransactionLog {
     }
 
     public String getDate() {
-        Date dNow = new Date();
-        return formatter.format(dNow);
+        return FORMATTER.format(new Date());
     }
 
     public void addTransaction(String message) {

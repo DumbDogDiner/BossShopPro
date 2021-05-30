@@ -44,6 +44,14 @@ public class BossShop extends JavaPlugin {
         INSTANCE.getLogger().info(s);
     }
 
+    public static void warn(String s) {
+        INSTANCE.getLogger().warning(s);
+    }
+
+    public static void err(String s) {
+        INSTANCE.getLogger().severe(s);
+    }
+
     public static void debug(String s) {
         if (ClassManager.manager.getSettings().isDebugEnabled()) {
             log(s);

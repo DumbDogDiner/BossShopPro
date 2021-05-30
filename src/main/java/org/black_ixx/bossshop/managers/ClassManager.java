@@ -1,5 +1,6 @@
 package org.black_ixx.bossshop.managers;
 
+import java.util.ArrayList;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.api.BossShopAddon;
 import org.black_ixx.bossshop.core.BSShops;
@@ -26,6 +27,7 @@ import org.black_ixx.bossshop.managers.serverpinging.ServerPingingManager;
 import org.black_ixx.bossshop.misc.MathTools;
 import org.black_ixx.bossshop.settings.Settings;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 
@@ -133,7 +135,12 @@ public class ClassManager {
         FileConfiguration config = plugin.getConfig();
         plugin.getInventoryListener().init(config.getInt("ClickDelay"), config.getInt("ClickSpamKick.ClickDelay"), config.getInt("ClickSpamKick.Warnings"), config.getInt("ClickSpamKick.ForgetTime"));
 
-        pagelayoutHandler = new PageLayoutHandler(plugin);
+        try {
+            pagelayoutHandler = new PageLayoutHandler();
+        } catch (InvalidConfigurationException e) {
+            plugin.getClassManager().getBugFinder().severe("Unable to load '/plugins/" + BossShop.NAME + "/pagelayout.yml'. Reason: " + e.getMessage());
+            pagelayoutHandler = new PageLayoutHandler(new ArrayList<>(), 0, false);
+        }
 
         //if (settings.getPointsEnabled()){ Is not known because shops are not yet loaded. But is required before shops are loaded in order to be able to display items properly.
         pointsManager = new PointsManager();

@@ -8,14 +8,13 @@ import java.io.File;
 import java.io.IOException;
 
 public class StorageManager {
+    private static final String FILE_NAME = "data";
 
-
-    private final String fileName = "data";
     private final File file;
     private FileConfiguration config = null;
 
     public StorageManager(final BossShop plugin) {
-        this.file = new File(plugin.getDataFolder().getAbsolutePath(), fileName);
+        this.file = new File(plugin.getDataFolder().getAbsolutePath(), FILE_NAME);
         reloadConfig();
     }
 
