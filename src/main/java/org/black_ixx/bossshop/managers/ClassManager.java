@@ -32,23 +32,22 @@ import org.bukkit.plugin.Plugin;
 public class ClassManager {
 
     public static ClassManager manager;
-    String USER = "%%__USER__%%";
-    private ItemStackChecker itemstackChecker;
-    private StringManager stringmanager;
+    private final ItemStackChecker itemstackChecker;
+    private final StringManager stringManager;
 
 
     ///////////////////////////////
-    private PointsManager pointsmanager;
-    private VaultHandler vaulthandler;
-    private PlaceholderAPIHandler placeholderhandler;
-    private MessageHandler messagehandler;
-    private ItemStackCreator itemstackCreator;
-    private ItemStackTranslator itemstackTranslator;
-    private BuyItemHandler buyItemHandler;
-    private ConfigHandler configHandler;
-    private BugFinder bugfinder;
-    private BossShop plugin;
-    private Settings settings;
+    private PointsManager pointsManager;
+    private VaultHandler vaultHandler;
+    private final PlaceholderAPIHandler placeholderHandler;
+    private final MessageHandler messageHandler;
+    private final ItemStackCreator itemStackCreator;
+    private final ItemStackTranslator itemstackTranslator;
+    private final BuyItemHandler buyItemHandler;
+    private final ConfigHandler configHandler;
+    private final BugFinder bugFinder;
+    private final BossShop plugin;
+    private final Settings settings;
     private BSShops shops;
     private PageLayoutHandler pagelayoutHandler;
     private BungeeCordManager bungeeCordManager;
@@ -56,13 +55,14 @@ public class ClassManager {
     private TransactionLog transactionLog;
     private ServerPingingManager serverPingingManager;
     private AutoRefreshHandler autoRefreshHandler;
-    private MultiplierHandler multiplierHandler;
-    private StorageManager storageManager;
-    private ISpawnEggHandler spawnEggHandler;
-    private ISpawnerHandler spawnerHandler;
-    private LanguageManager languageManager;
-    private ItemDataStorage itemdataStorage;
-    private PlayerDataHandler playerdataHandler;
+    private final MultiplierHandler multiplierHandler;
+    private final StorageManager storageManager;
+    // private ISpawnEggHandler spawnEggHandler;
+    private final ISpawnerHandler spawnerHandler;
+    private final LanguageManager languageManager;
+    private final ItemDataStorage itemDataStorage;
+    private final PlayerDataHandler playerDataHandler;
+
     public ClassManager(BossShop plugin) {
         this.plugin = plugin;
         manager = this;
@@ -77,26 +77,30 @@ public class ClassManager {
 
         //////////////// <- Independent Classes
 
-        playerdataHandler = new PlayerDataHandler();
+        playerDataHandler = new PlayerDataHandler();
         configHandler = new ConfigHandler(plugin);
         MathTools.init(settings.getNumberLocale(), settings.getNumberGroupingSize());
         storageManager = new StorageManager(plugin);
-        bugfinder = new BugFinder(plugin);
-        itemdataStorage = new ItemDataStorage(plugin);
+        bugFinder = new BugFinder(plugin);
+        itemDataStorage = new ItemDataStorage(plugin);
         multiplierHandler = new MultiplierHandler(plugin);
-        stringmanager = new StringManager();
-        itemstackCreator = new ItemStackCreator();
+        stringManager = new StringManager();
+        itemStackCreator = new ItemStackCreator();
         itemstackTranslator = new ItemStackTranslator();
         buyItemHandler = new BuyItemHandler();
         itemstackChecker = new ItemStackChecker();
-        messagehandler = new MessageHandler(plugin);
+        messageHandler = new MessageHandler(plugin);
 
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            placeholderhandler = new PlaceholderAPIHandler();
+            placeholderHandler = new PlaceholderAPIHandler();
+        } else {
+            placeholderHandler = null;
         }
 
         if (Bukkit.getPluginManager().isPluginEnabled("LangUtils")) {
             languageManager = new LanguageManager();
+        } else {
+            languageManager = null;
         }
 
         /*if (Bukkit.getPluginManager().isPluginEnabled("SilkSpawners")) {
@@ -114,6 +118,8 @@ public class ClassManager {
 
         if (Bukkit.getPluginManager().isPluginEnabled("EpicSpawners")) {
             spawnerHandler = new SpawnersHandlerEpicSpawners();
+        } else {
+            spawnerHandler = null;
         }
 
     }
@@ -130,7 +136,7 @@ public class ClassManager {
         pagelayoutHandler = new PageLayoutHandler(plugin);
 
         //if (settings.getPointsEnabled()){ Is not known because shops are not yet loaded. But is required before shops are loaded in order to be able to display items properly.
-        pointsmanager = new PointsManager();
+        pointsManager = new PointsManager();
         //}
 
         shops = new BSShops(plugin, settings);
@@ -140,7 +146,7 @@ public class ClassManager {
             if (VaultPlugin == null) {
                 ClassManager.manager.getBugFinder().warn("Vault was not found... You need it if you want to work with Permissions, Permission Groups or Money! Get it there: http://dev.bukkit.org/server-mods/vault/");
             } else {
-                vaulthandler = new VaultHandler(settings.getMoneyEnabled(), settings.getPermissionsEnabled());
+                vaultHandler = new VaultHandler(settings.getMoneyEnabled(), settings.getPermissionsEnabled());
             }
         }
 
@@ -188,30 +194,32 @@ public class ClassManager {
     }
 
     public StringManager getStringManager() {
-        return stringmanager;
+        return stringManager;
     }
 
     public PointsManager getPointsManager() {
-        return pointsmanager;
+        return pointsManager;
     }
 
     public VaultHandler getVaultHandler() {
-        if (vaulthandler == null) {
+        if (vaultHandler == null) {
+            // TODO is this a bug? see how it's set up in setupDependentClasses
+            //      especially weird because this method is called and then checked if not null in a few places
             return new VaultHandler(ClassManager.manager.getSettings().getMoneyEnabled(), ClassManager.manager.getSettings().getPointsEnabled());
         }
-        return vaulthandler;
+        return vaultHandler;
     }
 
     public PlaceholderAPIHandler getPlaceholderHandler() {
-        return placeholderhandler;
+        return placeholderHandler;
     }
 
     public MessageHandler getMessageHandler() {
-        return messagehandler;
+        return messageHandler;
     }
 
     public ItemStackCreator getItemStackCreator() {
-        return itemstackCreator;
+        return itemStackCreator;
     }
 
     public ItemStackTranslator getItemStackTranslator() {
@@ -227,7 +235,7 @@ public class ClassManager {
     }
 
     public BugFinder getBugFinder() {
-        return bugfinder;
+        return bugFinder;
     }
 
     public BossShop getPlugin() {
@@ -243,7 +251,7 @@ public class ClassManager {
     }
 
     public PlayerDataHandler getPlayerDataHandler() {
-        return playerdataHandler;
+        return playerDataHandler;
     }
 
     public BungeeCordManager getBungeeCordManager() {
@@ -285,7 +293,7 @@ public class ClassManager {
     }
 
     public ISpawnEggHandler getSpawnEggHandler() {
-        return spawnEggHandler;
+        return null; //spawnEggHandler;
     }
 
     public LanguageManager getLanguageManager() {
@@ -293,7 +301,7 @@ public class ClassManager {
     }
 
     public ItemDataStorage getItemDataStorage() {
-        return itemdataStorage;
+        return itemDataStorage;
     }
 
 
